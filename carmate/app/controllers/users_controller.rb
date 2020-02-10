@@ -27,24 +27,24 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/login.html'
     else
-      redirect to '/cars'
+      redirect to '/cars/show.html'
     end
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect to "/#{user.id}/cars"
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to "users/#{@user.id}"
     else
-      redirect to "/signup"
+      redirect to "/login"
     end
   end
 
-  # # GET: /users/5
-  # get "/users/:id" do
-  #   erb :"/users/show.html"
-  # end
+  # GET: /users/5
+  get "/users/:id" do
+    erb :"/users/show.html"
+  end
 
   # # GET: /users/5/edit
   # get "/users/:id/edit" do
