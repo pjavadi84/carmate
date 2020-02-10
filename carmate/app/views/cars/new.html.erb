@@ -1,0 +1,26 @@
+<h1>Create a new list: </h1>
+
+<form action="/cars" method="POST">
+  <div class="form-group">
+    <label for="make">Make:</label>
+    <input name="make" type="string" class="form-control" id="CarMake" aria-describedby="makeHelp" placeholder="please enter the car's manufacturer" required>
+  </div>
+  <div class="form-group">
+    <label for="model">Model:</label>
+    <input name="model" type="string" class="form-control" id="CarModel" placeholder="Please enter the model" required>
+  </div>
+  <div class="form-group">
+    <label for="color">Color:</label>
+    <input name="color" type="string" class="form-control" id="CarColor" placeholder="Please enter the color" required>
+  </div>
+  <div class="form-group">
+    <label for="type">Car Type:</label>
+    <input name="car_type" type="string" class="form-control" id="CarType" placeholder="Please enter the type (e.g. sedan, coupe, SUV, etc)" required>
+  </div>
+  <div class="form-group">
+    <label for="price">Current Price:</label>
+    <input name="price" type="integer" class="form-control" id="CarPrice" placeholder="enter the current MSRP" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>

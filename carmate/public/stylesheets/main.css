@@ -13,14 +13,14 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: lightblue;
+    background-color: black;
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
   }
 
   .wrapper {
-    background: #fff;
+    background: rgb(255, 218, 8);
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -55,9 +55,9 @@
     overflow: hidden;
   }
 
-  .content {
+  .jumbotron {
     float: left;
-    width: 60%; /* 480px / 800px */
+    background-color: rgb(255, 218, 8);
   }
 
   .sidebar {
@@ -80,6 +80,17 @@
     border-top: 2px solid #ccc;
     margin-top: 20px;
     padding-top: 20px;
+  }
+
+  .container {
+    display: grid;
+  }
+
+  .row {
+    display: flex;
+  }
+  .col {
+    flex: 1;
   }
 }
 
@@ -113,3 +124,5 @@
     line-height: 24px;
   }
 }
+
+

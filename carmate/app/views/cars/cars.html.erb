@@ -1,0 +1,14 @@
+<h3>Welcome, <%=current_user.username %>
+
+<p>Your cars are listed below: </p>
+
+<% @cars.each do |car| %>
+    <ul class="car_info">
+        <li class="car_id">Car ID: <%= car.id %></li>
+        <li class="car_make">Make: <%= car.make %></li>
+        <li class="car_model">Model: <%= car.model %></li>
+        <li class="car_color">Color: <%= car.color %></li>
+        <li class="car_type">Type: <%=car.car_type %></li>
+        <li class="car_price">Price: <%=car.price %></li>
+    </ul>
+<% end %>
