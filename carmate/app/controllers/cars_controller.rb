@@ -11,33 +11,35 @@ class CarsController < ApplicationController
   end
 
   # GET: /cars/new
-  get "/cars/new" do
-    erb :"/cars/new.html"
+    get "/cars/new" do
+    if logged_in?
+      erb :"/cars/new.html"
+    else
+      redirect to '/login'
+    end
   end
 
   # POST: /cars
   post "/cars" do
     if logged_in?
       if params[:make] == "" || params[:model] == "" || params[:color] == "" || params[:car_type] == "" || params[:price] == ""
-        redirect "/cars/new"
+        redirect "/"
       else
-        @car = current_user.cars.new(
+        @car = Car.create(
           make: params[:make],
           model: params[:model],
           color: params[:color],
           car_type: params[:car_type],
-          price: params[:price]
+          price: params[:price],
+          user_id: current_user.id
           )
-          if @car.save
-            redirect to "/cars/#{@car.id}"
-          else
-            redirect to "/cars/new"
-          end
+          
+          redirect to "/cars/#{@car.id}"  
         end
       else
-        redirect to '/login'
-      end
+      redirect to '/login'
     end
+  end
 
   # GET: /cars/5
   get "/cars/:id" do
@@ -51,7 +53,16 @@ class CarsController < ApplicationController
 
   # GET: /cars/5/edit
   get "/cars/:id/edit" do
-    erb :"/cars/edit.html"
+    if logged_in?
+      @user = User.find_by_id(params[:id])
+      if @user && @car.user = current_user
+        erb :"/cars/edit.html"
+      else
+        redirect to "/cars"
+      end
+    else
+      redirect to "/login"
+    end
   end
 
   # PATCH: /cars/5

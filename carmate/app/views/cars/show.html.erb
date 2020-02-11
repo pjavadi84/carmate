@@ -1,25 +1,27 @@
 <div class="container" id="car_details">
     <div class="row">
-    <div class="col"><strong>Make</strong>
-        <p><%= @car.make %>
-    </div>
-    <div class="col"><strong>Model</strong>
-        <p><%= @car.model %>
-    </div>
-    <div class="col"><strong>Color</strong>
-        <p><%= @car.color %>
-    </div>
-    <div class="col"><strong>Type</strong>
-        <p><%= @car.car_type %>
-    </div>
-    <div class="col"><strong>Price</strong>
-        <p>$<%= @car.price %>
-    </div>
+        <div class="col"><strong>Make</strong>
+            <p><%= @car.make %>
+        </div>
+        <div class="col"><strong>Model</strong>
+            <p><%= @car.model %>
+        </div>
+        <div class="col"><strong>Color</strong>
+            <p><%= @car.color %>
+        </div>
+        <div class="col"><strong>Type</strong>
+            <p><%= @car.car_type %>
+        </div>
+        <div class="col"><strong>Price</strong>
+            <p>$<%= @car.price %>
+        </div>
     </div>
 
     
 </div>
 
 <footer>
+    <a href="/cars">View all cars</a>
+    <br>
     <a href="/cars/<%=@car.id%>/edit">Edit</a>
 </footer>

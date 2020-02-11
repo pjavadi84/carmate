@@ -2,13 +2,35 @@
 
 <p>Your cars are listed below: </p>
 
-<% @cars.each do |car| %>
-    <ul class="car_info">
-        <li class="car_id">Car ID: <%= car.id %></li>
-        <li class="car_make">Make: <%= car.make %></li>
-        <li class="car_model">Model: <%= car.model %></li>
-        <li class="car_color">Color: <%= car.color %></li>
-        <li class="car_type">Type: <%=car.car_type %></li>
-        <li class="car_price">Price: <%=car.price %></li>
-    </ul>
-<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Car_id</th>
+      <th scope="col">Make</th>
+      <th scope="col">Model</th>
+      <th scope="col">Color</th>
+      <th scope="col">Type</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+
+  <tbody> 
+    <% @cars.each do |car| %>
+    <tr>
+      <td><%= car.id %></td>
+      <td><%= car.make %></td>
+      <td><%= car.model %></td>
+      <td><%= car.color %></td>
+      <td><%= car.car_type %></td>
+      <td><%= car.price %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  
+</table>
+
+<br>
+
+<a href="/cars/new">create a new car</a>
+<br>
+<a href="/">home</a>

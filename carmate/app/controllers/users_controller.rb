@@ -12,14 +12,18 @@ class UsersController < ApplicationController
   end
 
   # POST: /users
-  post "/signup" do
+  post "/users" do
     if params[:first_name].empty? || params[:last_name].empty? || params[:username].empty? || params[:password].empty?
       redirect to '/new'
     else
-      @user = User.new(:first_name =>params[:first_name], :last_name => params[:last_name], :username => params[:username], :password => params[:password])
-      @user.save
-      session[:user_id] = @user.id
-      redirect to '/cars'
+      if User.find_by(username: params[:username])
+        redirect to '/login'
+      else
+        @user = User.new(:first_name =>params[:first_name], :last_name => params[:last_name], :username => params[:username], :password => params[:password])
+        @user.save
+        session[:user_id] = @user.id
+        redirect to "users/#{@user.id}"
+      end
     end
   end
 
@@ -43,11 +47,18 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:id" do
-    erb :"/users/show.html"
+    if logged_in?
+      @user = User.find_by(id: params[:id])
+      erb :"/users/show.html"
+    else
+      redirect to "/login"
+    end
   end
 
   # # GET: /users/5/edit
-  # get "/users/:id/edit" do
+  # if logged_in?
+
+  #   get "/users/:id/edit" do
   #   erb :"/users/edit.html"
   # end
 

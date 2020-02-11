@@ -1,1 +1,12 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>Welcome <%= @user.username %></h1>
+
+<div class="account_snapshot">
+    <a href="/cars"> all cars </a>
+    <br>
+    <a href="/cars/new">Create a new car</a>
+    <br>
+    <a href="/cars/#{car.id}/edit">Edit car</a>
+    <br>
+    <a href="/logout"> Log Out </a>
+
+</div>
