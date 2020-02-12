@@ -53,9 +53,13 @@ class CarsController < ApplicationController
 
   # GET: /cars/5/edit
   get "/cars/:id/edit" do
+    @car = Car.find(params[:id])
     if logged_in?
-      @car = Car.find(params[:id])
-      erb :"/cars/edit.html"
+      if edit_authorization(@car)
+        erb :"/cars/edit.html"
+      else
+        redirect to "users/#{current_user.id}"
+      end
     else
       redirect to "/login"
     end
@@ -63,10 +67,14 @@ class CarsController < ApplicationController
 
   # PATCH: /cars/5
   patch "/cars/:id" do
+    @car = Car.find(params[:id])
     if logged_in?
-      @car = Car.find(params[:id])
-      @car.update(make: params[:make],model: params[:model], color: params[:color],car_type: params[:car_type],price: params[:price])
-      redirect to "/cars/#{@car.id}"
+      if @car.user == current_user
+        @car.update(make: params[:make],model: params[:model], color: params[:color],car_type: params[:car_type],price: params[:price])
+        redirect to "/cars/#{@car.id}"
+      else
+        redirect to "users/#{current_user.id}"
+      end
     else
       redirect to '/login'
     end
