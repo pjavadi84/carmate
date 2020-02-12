@@ -26,6 +26,10 @@ class ApplicationController < Sinatra::Base
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id] #(memoization)
     end
+
+    def edit_authorization(car)
+      current_user == car.user
+    end
   end
 
 end
