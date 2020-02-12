@@ -44,7 +44,7 @@ class CarsController < ApplicationController
   # GET: /cars/5
   get "/cars/:id" do
     if logged_in?
-      @car = Car.find_by_id(params[:id])
+      @car = Car.find(params[:id])
       erb :"/cars/show.html"
     else
       redirect to "/login"
@@ -54,12 +54,8 @@ class CarsController < ApplicationController
   # GET: /cars/5/edit
   get "/cars/:id/edit" do
     if logged_in?
-      @user = User.find_by_id(params[:id])
-      if @user && @car.user = current_user
-        erb :"/cars/edit.html"
-      else
-        redirect to "/cars"
-      end
+      @car = Car.find(params[:id])
+      erb :"/cars/edit.html"
     else
       redirect to "/login"
     end
@@ -67,7 +63,13 @@ class CarsController < ApplicationController
 
   # PATCH: /cars/5
   patch "/cars/:id" do
-    redirect "/cars/:id"
+    if logged_in?
+      @car = Car.find(params[:id])
+      @car.update(make: params[:make],model: params[:model], color: params[:color],car_type: params[:car_type],price: params[:price])
+      redirect to "/cars/#{@car.id}"
+    else
+      redirect to '/login'
+    end
   end
 
   # DELETE: /cars/5/delete
