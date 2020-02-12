@@ -54,25 +54,7 @@ class UsersController < ApplicationController
       redirect to "/login"
     end
   end
-
-  # # GET: /users/5/edit
-  # if logged_in?
-
-  #   get "/users/:id/edit" do
-  #   erb :"/users/edit.html"
-  # end
-
-  # # PATCH: /users/5
-  # patch "/users/:id" do
-  #   redirect "/users/:id"
-  # end
-
-  # # DELETE: /users/5/delete
-  # delete "/users/:id/delete" do
-  #   redirect "/users"
-  # end
-
-  #LOGOUT: /users/5/logout
+  
   get '/logout' do
     if logged_in?
       session.destroy
