@@ -55,7 +55,7 @@ class CarsController < ApplicationController
   get "/cars/:id/edit" do
     @car = Car.find(params[:id])
     if logged_in?
-      if edit_authorization(@car)
+      if edit_authorized?(@car)
         erb :"/cars/edit.html"
       else
         redirect to "users/#{current_user.id}"
@@ -69,7 +69,7 @@ class CarsController < ApplicationController
   patch "/cars/:id" do
     @car = Car.find(params[:id])
     if logged_in?
-      if @car.user == current_user
+      if edit_authorized?(@car)
         @car.update(make: params[:make],model: params[:model], color: params[:color],car_type: params[:car_type],price: params[:price])
         redirect to "/cars/#{@car.id}"
       else
@@ -81,7 +81,18 @@ class CarsController < ApplicationController
   end
 
   # DELETE: /cars/5/delete
-  delete "/cars/:id/delete" do
-    redirect "/cars"
+  delete "/cars/:id" do
+    @car = Car.find(params[:id])
+    if logged_in?
+      if edit_authorized?(@car)
+        @car.destroy
+        redirect to '/cars'
+      else
+        redirect to "users/#{current_user.id}"
+      end
+    else
+      redirect to '/login'
+    end
   end
+
 end
