@@ -1,5 +1,12 @@
 <h1>Please login to access the list of your cars:</h1>
 
+
+<% if flash[:message] %>
+  <div class="credential_error">
+     <h3><%= flash[:message] %></h3>
+  </div>
+<% end %>
+
 <div class="create_login">
   <form action='/login' method="POST">
     <div class="form-group">

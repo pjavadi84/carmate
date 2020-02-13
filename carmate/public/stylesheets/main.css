@@ -93,6 +93,10 @@
   .col {
     flex: 1;
   }
+  
+  .credential_error {
+    color: red;
+  }
 }
 
 @media screen and (max-width: 600px) {

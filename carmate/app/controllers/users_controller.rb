@@ -14,15 +14,17 @@ class UsersController < ApplicationController
   # POST: /users
   post "/users" do
     if params[:first_name].empty? || params[:last_name].empty? || params[:username].empty? || params[:password].empty?
-      redirect to '/new'
+      flash[:message]="field can't be empty! Please fill out all the information and try again."
+      redirect to '/signup'
     else
-      if User.find_by(username: params[:username])
-        redirect to '/login'
+      if User.find_by(username: params[:username], email: params[:email], first_name: params[:first_name], last_name: params[:last_name])
+          flash[:message]="user profile already exist in our database. please try another email."
+          redirect to '/signup'
       else
-        @user = User.new(:first_name =>params[:first_name], :last_name => params[:last_name], :username => params[:username], :password => params[:password])
-        @user.save
-        session[:user_id] = @user.id
-        redirect to "users/#{@user.id}"
+          @user = User.new(:first_name =>params[:first_name], :last_name => params[:last_name], :username => params[:username], :password => params[:password])
+          @user.save
+          session[:user_id] = @user.id
+          redirect to "users/#{@user.id}"
       end
     end
   end
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to "users/#{@user.id}"
     else
+      flash[:message]="login credential failed. Try again!"
       redirect to "/login"
     end
   end

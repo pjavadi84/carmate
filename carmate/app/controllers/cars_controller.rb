@@ -23,7 +23,7 @@ class CarsController < ApplicationController
   post "/cars" do
     if logged_in?
       if params[:make] == "" || params[:model] == "" || params[:color] == "" || params[:car_type] == "" || params[:price] == ""
-        redirect "/"
+        redirect "/car"
       else
         @car = Car.create(
           make: params[:make],
