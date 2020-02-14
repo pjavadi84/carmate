@@ -1,10 +1,18 @@
 <h1>Welcome <%= @user.username %></h1>
 
+
+<% if flash[:login_success] %>
+    <div class="login_success">
+        <%= flash[:login_success] %>
+    </div>
+<% end %>
+
+<br><br>
+
 <div class="account_snapshot">
     <a href="/cars"> all cars </a>
     <br>
     <a href="/cars/new">Create a new car</a>
     <br>
     <a href="/logout"> Log Out </a>
-
 </div>

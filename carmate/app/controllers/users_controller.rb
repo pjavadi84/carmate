@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/login.html'
     else
+      flash[:login_success] = "login successful!"
       redirect to '/cars/show.html'
     end
   end
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to "users/#{@user.id}"
     else
-      flash[:message]="login credential failed. Try again!"
+      flash[:message]="login credential failed. Please try again!"
       redirect to "/login"
     end
   end
