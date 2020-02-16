@@ -1,8 +1,8 @@
 <h1>Please login to access the list of your cars:</h1>
 
-<% if flash[:login_failed] %> 
+<% if flash[:failed_login] %> 
   <div class="login_error_message" %>
-    <h3><%= flash[:login_failed] %></h3>
+    <h3><%= flash[:failed_login] %></h3>
   </div>
 <% end %>
 
