@@ -94,7 +94,7 @@
     flex: 1;
   }
   
-  .credential_error {
+  .login_error_message {
     color: red;
   }
 }
