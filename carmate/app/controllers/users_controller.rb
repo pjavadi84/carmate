@@ -42,9 +42,10 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      flash[:successful_lobin] = "login successful!"
       redirect to "users/#{@user.id}"
     else
-      flash[:message]="login credential failed. Please try again!"
+      flash[:failed_login]="login credential failed. Please try again!"
       redirect to "/login"
     end
   end
