@@ -1,26 +1,34 @@
 <h1>Create an account below</h1>
 
+<% if flash[:message] %>
+  <div class="credential_error">
+    <%= flash[:message] %>
+  </div>
+<% end %>
+
+<br><br>
+
 <div class="create_user">
 <form action="/users" method="POST">
   <div class="form-group">
     <label for="firstname">First Name:</label>
-    <input name="first_name" type="string" class="form-control" id="FirstName" aria-describedby="firstnameHelp" placeholder="please enter your first name" required>
+    <input name="first_name" type="string" class="form-control" id="FirstName" aria-describedby="firstnameHelp" placeholder="please enter your first name">
   </div>
   <div class="form-group">
     <label for="lastname">Last Name:</label>
-    <input name="last_name" type="string" class="form-control" id="LastName" placeholder="Please enter your last name" required>
+    <input name="last_name" type="string" class="form-control" id="LastName" placeholder="Please enter your last name">
   </div>
   <div class="form-group">
     <label for="email">Email:</label>
-    <input name="email" type="email" class="form-control" id="Email" placeholder="Please enter your email" required>
+    <input name="email" type="email" class="form-control" id="Email" placeholder="Please enter your email">
   </div>
   <div class="form-group">
     <label for="username">Username:</label>
-    <input name="username" type="string" class="form-control" id="String" placeholder="Please enter a new username" required>
+    <input name="username" type="string" class="form-control" id="String" placeholder="Please enter a new username">
   </div>
   <div class="form-group">
     <label for="password">Password:</label>
-    <input name="password" type="password" class="form-control" id="password" placeholder="Please enter a password" required>
+    <input name="password" type="password" class="form-control" id="password" placeholder="Please enter a password">
   </div>
 
   <button type="submit" class="btn btn-primary">Create</button>

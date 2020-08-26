@@ -1,4 +1,5 @@
 require './config/environment'
+require 'sinatra/flash'
 
 class ApplicationController < Sinatra::Base
 
@@ -7,6 +8,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "carmate_secret"
+    register Sinatra::Flash
   end
 
   get "/" do
@@ -25,6 +27,10 @@ class ApplicationController < Sinatra::Base
 
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id] #(memoization)
+    end
+
+    def edit_authorized?(car)
+      car.user == current_user
     end
   end
 

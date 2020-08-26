@@ -1,4 +1,7 @@
-<h3>Welcome, <%=current_user.username %>
+<h3>Welcome,<strong> <%=current_user.username %></strong></h3>
+
+
+<br><br>
 
 <p>Your cars are listed below: </p>
 
@@ -11,18 +14,20 @@
       <th scope="col">Color</th>
       <th scope="col">Type</th>
       <th scope="col">Price</th>
+      <th scope="col">Salesperson</th>
     </tr>
   </thead>
 
   <tbody> 
     <% @cars.each do |car| %>
     <tr>
-      <td><%= car.id %></td>
+      <td><a href="/cars/<%= car.id %>"><%= car.id %></a></td>
       <td><%= car.make %></td>
       <td><%= car.model %></td>
       <td><%= car.color %></td>
       <td><%= car.car_type %></td>
       <td><%= car.price %></td>
+      <td><%= car.user.first_name %></td>
     </tr>
     <% end %>
   </tbody>

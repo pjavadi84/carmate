@@ -14,15 +14,17 @@ class UsersController < ApplicationController
   # POST: /users
   post "/users" do
     if params[:first_name].empty? || params[:last_name].empty? || params[:username].empty? || params[:password].empty?
-      redirect to '/new'
+      flash[:message]="field can't be empty! Please fill out all the information and try again."
+      redirect to '/signup'
     else
-      if User.find_by(username: params[:username])
-        redirect to '/login'
+      if User.find_by(username: params[:username], email: params[:email], first_name: params[:first_name], last_name: params[:last_name])
+          flash[:message]="user profile already exist in our database. please try another email."
+          redirect to '/signup'
       else
-        @user = User.new(:first_name =>params[:first_name], :last_name => params[:last_name], :username => params[:username], :password => params[:password])
-        @user.save
-        session[:user_id] = @user.id
-        redirect to "users/#{@user.id}"
+          @user = User.new(:first_name =>params[:first_name], :last_name => params[:last_name], :username => params[:username], :password => params[:password])
+          @user.save
+          session[:user_id] = @user.id
+          redirect to "users/#{@user.id}"
       end
     end
   end
@@ -31,6 +33,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/login.html'
     else
+      flash[:login_success] = "login successful!"
       redirect to '/cars/show.html'
     end
   end
@@ -39,8 +42,10 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      flash[:successful_lobin] = "login successful!"
       redirect to "users/#{@user.id}"
     else
+      flash[:failed_login]="login credential failed. Please try again!"
       redirect to "/login"
     end
   end
@@ -54,25 +59,7 @@ class UsersController < ApplicationController
       redirect to "/login"
     end
   end
-
-  # # GET: /users/5/edit
-  # if logged_in?
-
-  #   get "/users/:id/edit" do
-  #   erb :"/users/edit.html"
-  # end
-
-  # # PATCH: /users/5
-  # patch "/users/:id" do
-  #   redirect "/users/:id"
-  # end
-
-  # # DELETE: /users/5/delete
-  # delete "/users/:id/delete" do
-  #   redirect "/users"
-  # end
-
-  #LOGOUT: /users/5/logout
+  
   get '/logout' do
     if logged_in?
       session.destroy

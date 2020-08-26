@@ -1,5 +1,11 @@
 <h1>Please login to access the list of your cars:</h1>
 
+<% if flash[:failed_login] %> 
+  <div class="login_error_message" %>
+    <h3><%= flash[:failed_login] %></h3>
+  </div>
+<% end %>
+
 <div class="create_login">
   <form action='/login' method="POST">
     <div class="form-group">
@@ -13,12 +19,9 @@
     </div>
     
     <button type="submit" class="btn btn-primary">Login!</button>
-
-    <br>
-
+    <br><br>
     <a href='/signup'>create an account</a>
+    <br>
+    <a href='/'>Cancel</a>
   </form>
 </div>
-
-<br>
-<a href="/">cancel</a>

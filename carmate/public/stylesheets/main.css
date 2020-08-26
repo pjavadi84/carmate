@@ -93,6 +93,10 @@
   .col {
     flex: 1;
   }
+  
+  .login_error_message {
+    color: red;
+  }
 }
 
 @media screen and (max-width: 600px) {
